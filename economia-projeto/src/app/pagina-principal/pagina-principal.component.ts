@@ -1,37 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService, Financas } from '../usuario.service';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgIf } from '@angular/common';
+import { UsuarioService } from '../usuario.service';
 @Component({
   selector: 'app-pagina-principal',
-  imports: [CommonModule,ReactiveFormsModule ],
+  standalone: true,
+  imports: [NgIf],
   templateUrl: './pagina-principal.component.html',
-  styleUrl: './pagina-principal.component.css'
+  styleUrls: ['./pagina-principal.component.css'],
 })
+export class PaginaPrincipalComponent implements OnInit {
+  financa: any | null = null;
 
-export class PaginaPrincipalComponent implements OnInit{
-  financasData?: Financas;
-  erro: any;
+  constructor(private usuarioService: UsuarioService) {}
 
-  constructor(private usuarioService: UsuarioService) { }
-
-  ngOnInit(): void {
-    const nome = localStorage.getItem('nome');
-    const email = localStorage.getItem('email');
-
-    if (nome && email) {
-      this.usuarioService.obterFinancasPorUsuario(nome, email).subscribe(
-        data => {
-          this.financasData = data;
-        },
-        error => {
-          console.error('Erro ao obter os dados das finanças:', error);
-          this.erro = error;
-        }
-      );
-    } else {
-      console.error('Nome e email não encontrados no localStorage');
-    }
+  ngOnInit() {
+    this.usuarioService.getFinancas().subscribe(
+      (financas) => {
+        const indexAleatorio = Math.floor(Math.random() * financas.length);
+        this.financa = financas[indexAleatorio]; // Seleciona uma finança aleatória
+      },
+      (error) => {
+        console.error('Erro ao buscar finanças:', error);
+      }
+    );
   }
 }

@@ -1,32 +1,22 @@
-/* pagina-principal.component.css */
+div {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
 
-.financas-container {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .financas-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .financas-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    font-size: 18px;
-  }
-  
-  .financas-item span {
-    color: #555;
-  }
-  
-  .financas-item strong {
-    color: #000;
-  }
-  
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+strong {
+  color: #555;
+}

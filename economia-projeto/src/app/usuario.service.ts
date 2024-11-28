@@ -1,35 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface Usuario {
-  nome: string;
-  email: string;
-}
-
-export interface Financas {
-  usuario: Usuario;
-  renda_mensal: number;
-  despesas: number;
-  lucro: number;
-  objetivo: number;
-  meses: number;
-}
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsuarioService {
-  public apiUrl = 'http://127.0.0.1:8000/usuarios/'; 
+  private apiUrl = 'http://localhost:8000/dados'; // URL unificada do backend
 
-  constructor(public http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  
-  obterFinancasPorUsuario(nome: string, email: string): Observable<Financas> {
-    const params = new HttpParams()
-      .set('nome', nome)
-      .set('email', email);
+  // Busca todos os dados da API unificada
+  getDados(): Observable<{ usuarios: any[]; financas: any[] }> {
+    return this.http.get<{ usuarios: any[]; financas: any[] }>(this.apiUrl);
+  }
 
-    return this.http.get<Financas>(`${this.apiUrl}/financas/usuario/`, { params });
+  // Filtra apenas os usuários
+  getUsuarios(): Observable<any[]> {
+    return this.getDados().pipe(map((data) => data.usuarios));
+  }
+
+  // Filtra apenas as finanças
+  getFinancas(): Observable<any[]> {
+    return this.getDados().pipe(map((data) => data.financas));
   }
 }
