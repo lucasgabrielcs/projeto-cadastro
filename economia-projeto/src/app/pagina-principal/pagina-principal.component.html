@@ -1,0 +1,34 @@
+<div *ngIf="erro">
+  <p>Ocorreu um erro ao carregar as finanças: {{ erro.message }}</p>
+</div>
+
+<div *ngIf="financasData">
+  <h2>Bem-vindo, {{ financasData.usuario.nome }}</h2>
+  <p>Email: {{ financasData.usuario.email }}</p>
+
+  <h3>Resumo Financeiro</h3>
+  <div>
+    <span>Renda Mensal:</span>
+    <strong>{{ financasData.renda_mensal | currency:'BRL' }}</strong>
+  </div>
+  <div>
+    <span>Despesas:</span>
+    <strong>{{ financasData.despesas | currency:'BRL' }}</strong>
+  </div>
+  <div>
+    <span>Lucro:</span>
+    <strong>{{ financasData.lucro | currency:'BRL' }}</strong>
+  </div>
+  <div>
+    <span>Objetivo:</span>
+    <strong>{{ financasData.objetivo | currency:'BRL' }}</strong>
+  </div>
+  <div>
+    <span>Meses para Atingir o Objetivo:</span>
+    <strong>{{ financasData.meses }}</strong>
+  </div>
+</div>
+
+<div *ngIf="!financasData && !erro">
+  <p>Carregando dados...</p>
+</div>
