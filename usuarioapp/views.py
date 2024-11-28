@@ -20,23 +20,19 @@ class UsuarioListCreateView(APIView):
         if serializer.is_valid():
             usuario_instance, created = usuario.objects.get_or_create(
                 nome=serializer.validated_data['nome'],
-                email=serializer.validated_data['email']
+                email=serializer.validated_data['email'],
+                
             )
 
-            if created:
-                financas.objects.create(usuario=usuario_instance)
-            return Response({'message': 'Usuário processado com sucesso'}, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-class FinancasByUserView(APIView):
+class FinancasAPIView(APIView):
+    def get(self, request):
+        financas_list = financas.objects.all()
+        serializer = FinancasSerializer(financas_list, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
-        nome = request.data.get('nome')
-        email = request.data.get('email')
-
-        try:
-            usuario_instance = usuario.objects.get(nome=nome, email=email)
-            financa = financas.objects.get(usuario=usuario_instance)
-        except (usuario.DoesNotExist, financas.DoesNotExist):
-            return Response({'error': 'Usuário ou finanças não encontrados'}, status=status.HTTP_404_NOT_FOUND)
-
-        serializer = FinancasSerializer(financa)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serializer = FinancasSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
