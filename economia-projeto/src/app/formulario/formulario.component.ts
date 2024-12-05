@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { UsuarioService } from '../usuario.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-formulario',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './formulario.component.html',
-  styleUrls: ['./formulario.component.css'],
+  styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
   nome: string = '';
@@ -32,5 +32,4 @@ export class FormularioComponent {
       }
     );
   }
-
 }

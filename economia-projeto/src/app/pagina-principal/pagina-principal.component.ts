@@ -6,9 +6,9 @@ import { UsuarioService } from '../usuario.service';
   standalone: true,
   imports: [NgIf],
   templateUrl: './pagina-principal.component.html',
-  styleUrls: ['./pagina-principal.component.css'],
+  styleUrl: './pagina-principal.component.css'
 })
-export class PaginaPrincipalComponent implements OnInit {
+export class PaginaPrincipalComponent implements OnInit{
   financa: any | null = null;
 
   constructor(private usuarioService: UsuarioService) {}
