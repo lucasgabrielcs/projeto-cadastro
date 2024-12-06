@@ -1,12 +1,17 @@
-<div *ngIf="financa; else loading">
-    <h1>Detalhes Financeiros</h1>
+
+<div *ngIf="financa; else loading" class="d-flex justify-content-center align-items-start vh-100 bg-light"
+ style="align-items: flex-start; padding-top: 10%;margin-top:200px; " >
+    <h1 class="text-center text-primary mb-4">Detalhes Financeiros</h1>
     <p><strong>Renda Mensal:</strong> {{ financa.renda_mensal }}</p>
     <p><strong>Despesas:</strong> {{ financa.despesas }}</p>
     <p><strong>Lucro:</strong> {{ financa.lucro }}</p>
     <p><strong>Objetivo:</strong> {{ financa.objetivo }}</p>
     <p><strong>Meses:</strong> {{ financa.meses }}</p>
   </div>
-  
-  <ng-template #loading>
-    <p>Carregando informações financeiras...</p>
-  </ng-template>
+
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <p class="text-secondary fs-4">Carregando informações financeiras...</p>
+  </div>
+</ng-template>

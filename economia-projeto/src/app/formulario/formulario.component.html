@@ -1,14 +1,42 @@
- <form  #userForm="ngForm" (ngSubmit)="verificarUsuario()">
-    <div>
-      <label for="nome">nome:</label>
-      <input type="text" id="nome" [(ngModel)]="nome" name="nome" required/>
+<div 
+  class="d-flex justify-content-center vh-100 bg-light" 
+  style="align-items: flex-start; padding-top: 10%;">
+  <form 
+    #userForm="ngForm" 
+    (ngSubmit)="verificarUsuario()" 
+    class="p-4 rounded shadow-lg" 
+    style="width: 100%; max-width: 400px; background: #e6e6e6; border: 1px solid #dddddd;">
+    <h3 class="text-center text-primary mb-4">Cadastro</h3>
+    <div class="mb-3">
+      <label for="nome" class="form-label fw-bold">Nome:</label>
+      <input 
+        type="text" 
+        id="nome" 
+        class="form-control form-control-lg" 
+        [(ngModel)]="nome" 
+        name="nome" 
+        required 
+        placeholder="Digite seu nome"
+      />
     </div>
-  
-    <div>
-      <label for="email">email:</label>
-      <input type="email" id="email" [(ngModel)]="email" name="email" required/>
+    <div class="mb-3">
+      <label for="email" class="form-label fw-bold">Email:</label>
+      <input 
+        type="email" 
+        id="email" 
+        class="form-control form-control-lg" 
+        [(ngModel)]="email" 
+        name="email" 
+        required 
+        placeholder="Digite seu email"
+      />
     </div>
-  
-    <button type="submit"  [disabled]="userForm.invalid">enviar</button>
+    <button 
+      type="submit" 
+      class="btn btn-primary btn-lg w-100" 
+      [disabled]="userForm.invalid"
+      style="background-color: #212d8a;">
+      Enviar
+    </button>
   </form>
- 
+</div>
